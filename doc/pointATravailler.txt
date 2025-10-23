@@ -1,0 +1,13 @@
+probleme avec l'utilisation des corps a corps ( CAC )
+
+probleme avec les sort de heal en neutre  ( vertu iop , sinistro xelor)
+
+premonition xelor c'est pas du heal askip 
+
+- reparé le logger 
+
+- probleme avec les mobs qui invoque des copie de nos personnages 
+(ex : la faux dans les quetes environnemental )
+
+- fichier theme 
+

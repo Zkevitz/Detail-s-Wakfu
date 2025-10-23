@@ -1,0 +1,180 @@
+
+# 1) Principe / pipeline recommandé
+
+1. **Mesurer d’abord** : produire des données de profilage sur un workload réaliste.
+2. **Analyser** : repérer les hot-spots (fonctions/ligne qui prennent le plus de temps ou mémoire).
+3. **Prioriser** : appliquer changements ayant le meilleur rapport coût/impact.
+4. **Répéter** : profiler à nouveau pour vérifier l’impact.
+5. **Valider** : tests de régression, correctifs fonctionnels, comportement sous charge.
+
+Règle d’or : *optimiser ce qui est réellement lent*, pas ce que tu *penses*.
+
+---
+
+# 2) Outils CPU (déterministes et sampling)
+
+### a) `cProfile` (intégré)
+
+Profilage déterministe (précis pour appels de fonction).
+Exemple usage rapide :
+
+```bash
+python -m cProfile -o profil.out ton_script.py
+python -m pstats profil.out
+```
+
+Exemple pour analyser dans Python :
+
+```python
+import pstats
+p = pstats.Stats('profil.out')
+p.strip_dirs().sort_stats('cumtime').print_stats(30)
+```
+
+* `cumtime` = temps cumulé (utile pour hot-paths)
+* `tottime` = temps passé **dans la fonction**, sans les appels enfants
+
+### b) `snakeviz` / `gprof2dot` pour visualiser
+
+Installe puis :
+
+```bash
+snakeviz profil.out
+# ou convertir en dot + PNG
+gprof2dot -f pstats profil.out | dot -Tpng -o profil.png
+```
+
+### c) `py-spy` (sampling profiler — idéal production)
+
+Sampling, non intrusif, fonctionne sans redémarrer :
+
+```bash
+py-spy top --pid 12345
+py-spy record -o flame.svg -- python ton_script.py
+# ouvre flame.svg dans un navigateur
+```
+
+Très utile pour processus en production (faible overhead).
+
+### d) `pyinstrument` (simple, lisible)
+
+```bash
+pip install pyinstrument
+pyinstrument ton_script.py
+```
+
+Donne un rapport hiérarchique simple.
+
+---
+
+# 3) Profilage ligne à ligne (pour affiner)
+
+### `line_profiler`
+
+```bash
+pip install line_profiler
+# Décorateur @profile (ou from line_profiler import LineProfiler)
+@profile
+def f(...): ...
+```
+
+Puis :
+
+```bash
+kernprof -l -v ton_script.py
+```
+
+Donne le temps par ligne (très utile si une fonction lourde contient plusieurs étapes).
+
+---
+
+# 4) Mémoire / fuites
+
+### a) `tracemalloc` (standard, snapshots)
+
+```python
+import tracemalloc
+
+tracemalloc.start()
+# exécution du code
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics('lineno')
+for stat in top_stats[:10]:
+    print(stat)
+```
+
+### b) `memory_profiler`
+
+```bash
+pip install memory_profiler
+from memory_profiler import profile
+
+@profile
+def f(...):
+    ...
+```
+
+Lance `python -m memory_profiler ton_script.py` ou `mprof run ...` + `mprof plot`.
+
+### c) `objgraph` pour visualiser objets persistants
+
+---
+
+# 5) Exemple complet : cProfile + analyse
+
+```bash
+python -m cProfile -o prof.out app.py
+python - <<'PY'
+import pstats
+p = pstats.Stats('prof.out')
+p.strip_dirs().sort_stats('cumtime').print_stats(20)
+PY
+```
+
+Interprétation :
+
+* Si une fonction a **beaucoup** de `cumtime`, regarde si c’est l’algorithme (opti possible) ou des appels répétitifs inutiles.
+* Si `tottime` élevé et `cumtime` ≈ `tottime`, la fonction elle-même est lente.
+* Si `cumtime` >> `tottime`, le temps vient des appels enfants → creuse plus bas.
+
+---
+
+# 6) Conseils pratiques d’optimisation
+
+* **Mesure avant / après** chaque changement.
+* **Amdahl** : accélérer 90% d’une tâche qui ne représente que 10% du temps ne change quasi rien.
+* Préfère : algorithmes meilleure complexité > micro-optimisations.
+* Pour gros calculs : **vectoriser** avec NumPy, utiliser C/Cython, Numba, ou multiprocessing (ou offload sur GPU).
+* Pour I/O bound : utiliser asynchrone / threads / batching.
+* Cache (memoize) si appels répétés avec mêmes entrées.
+* Limite allocations d’objets temporaires si GC/GC pressure est problématique.
+* Pour UI (Tkinter) : éviter travail long dans le thread principal — déplacer en thread/process ou chunking.
+
+---
+
+# 7) Recommandation de workflow concret
+
+1. Profiler `cProfile` sur un run représentatif.
+2. Ouvrir `snakeviz` ou générer flamegraph avec `py-spy` pour repérer hotspots visuellement.
+3. Si hotspot dans une grosse fonction, utiliser `line_profiler` pour voir quelles lignes sont lentes.
+4. Pour fuite mémoire, faire snapshots `tracemalloc` ou `memory_profiler`.
+5. Appliquer modification ciblée → re-profiler.
+
+---
+
+# 8) Commandes utiles résumé
+
+* `python -m cProfile -o profil.out app.py`
+* `snakeviz profil.out`
+* `py-spy record -o flame.svg -- python app.py`
+* `kernprof -l -v script.py` (line_profiler)
+* `python -m memory_profiler script.py` ou `mprof run ...`
+
+---
+
+Si tu veux, je peux :
+
+* te fournir un **script type** qui automatise cProfile → tri → affichage top N,
+* ou **analyser** un extrait de ton code (colle la fonction/les parties lentes) et je te propose où profiler exactement et quelles optimisations essayer.
+
+Tu veux que je te génère le script d’automatisation pour profiler et produire un rapport lisible ?

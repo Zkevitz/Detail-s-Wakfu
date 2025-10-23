@@ -1,0 +1,119 @@
+[
+  {
+    "spells": [
+      {
+        "name": "Flèche fulminante",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Flèche d'immolation",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Flèche enflammée",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Flèche ardente",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Flèche explosive",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Flèche cinglante",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Pluie de flèches",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Flèche criblante",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Flèche perçante",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Flèche destructrice",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Flèche chercheuse",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Flèche de recul",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Flèche tempête",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Flèche harcelante",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Flèche statique",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Flèche lumineuse",
+        "element": "Neutre",
+        "indirect": false
+      }
+    ],
+    "affutage": 0,
+    "précision": 0,
+    "className": "CRA",
+    "name": "Rapliru",
+    "PlayedTurn": 0,
+    "UsedSpell": [
+      {
+        "name": "Flèche chercheuse",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Flèche chercheuse",
+        "element": "Air",
+        "indirect": false
+      }
+    ],
+    "DamageDone": [
+      1756,
+      1104
+    ],
+    "AirDamage": [],
+    "FireDamage": [],
+    "WaterDamage": [],
+    "EarthDamage": [],
+    "HealDone": [],
+    "ShieldDone": [],
+    "TotalAmountOfShield": 0,
+    "TotalAmountOfDamage": 2860,
+    "TotalAmountOfHeal": 0,
+    "ShieldRank": 1,
+    "DamageRank": 1,
+    "HealRank": 1
+  }
+]
