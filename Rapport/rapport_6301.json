@@ -1,0 +1,137 @@
+[
+  {
+    "spells": [
+      {
+        "name": "Épée céleste",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Fulgur",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Super Iop Punch",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Jugement",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Super Iop Punch",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Colère de Iop",
+        "element": "Feu",
+        "indirect": false
+      },
+      {
+        "name": "Ébranler",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Roknocerok",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Fendoir",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Charge",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Ravage",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Jabs",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Rafale",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Torgnole",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Tannée",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Épée de Iop",
+        "element": "Air",
+        "indirect": false
+      },
+      {
+        "name": "Uppercut",
+        "element": "Neutre",
+        "indirect": false
+      },
+      {
+        "name": "Éventrail",
+        "element": "Neutre",
+        "indirect": false
+      }
+    ],
+    "concentrations": 0,
+    "className": "IOP",
+    "name": "Gigosqus",
+    "PlayedTurn": 0,
+    "UsedSpell": [
+      {
+        "name": "Fendoir",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Fendoir",
+        "element": "Terre",
+        "indirect": false
+      },
+      {
+        "name": "Fulgur",
+        "element": "Feu",
+        "indirect": false
+      }
+    ],
+    "DamageDone": [
+      7223,
+      3335,
+      5216
+    ],
+    "AirDamage": [],
+    "FireDamage": [],
+    "WaterDamage": [],
+    "EarthDamage": [],
+    "HealDone": [],
+    "ShieldDone": [
+      938,
+      938
+    ],
+    "TotalAmountOfShield": 1876,
+    "TotalAmountOfDamage": 15774,
+    "TotalAmountOfHeal": 0,
+    "ShieldRank": 1,
+    "DamageRank": 1,
+    "HealRank": 1
+  }
+]

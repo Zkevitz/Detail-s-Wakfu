@@ -1,0 +1,9 @@
+[tool.taskipy.tasks]
+
+build : "pyinstaller --onefile --noconsole ^
+    --hidden-import=PIL ^
+    --hidden-import=PIL._tkinter_finder ^
+    --hidden-import=customtkinter ^
+    --hidden-import=watchdog.observers ^
+    --hidden-import=watchdog.events ^
+    monitor2.py"
